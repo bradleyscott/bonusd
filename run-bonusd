@@ -1,0 +1,10 @@
+# Build storage container
+docker rm bonusd-storage
+docker build -t bonusd-storage -f volume.Dockerfile .
+docker run -d --name=bonusd-storage bonusd-storage
+
+# Build and run bonusd blockchain
+docker build -t bonusd -f service.Dockerfile .
+docker run -d -p 6501:6501 -p 6502:6502 --volumes-from=bonusd-storage bonusd multichaind bonusd -rpcallowip=172.17.42.1 -rpcpassword=password
+
+echo "bonusd blockchain has now started"
