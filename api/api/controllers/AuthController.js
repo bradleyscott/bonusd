@@ -41,11 +41,10 @@ var AuthController = {
                     sails.log.error('User authentication failed');
                     sails.log.error(error);
 
-                    res.json(401, error);
+                    res.unauthorized(error);
                 } else {
-                    // Mark the session as authenticated to work with default Sails sessionAuth.js policy
-                    req.session.authenticated = true;
-                    res.json(req.user);
+                    var token = JWTService.createToken(user);
+                    res.json(token);
                 }
             });
         });
