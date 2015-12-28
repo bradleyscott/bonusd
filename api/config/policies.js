@@ -29,13 +29,6 @@ module.exports.policies = {
     '*': [
         'jwtAuth',
         'passport',
-        'sessionAuth',
-        'ModelPolicy',
-        'AuditPolicy',
-        'OwnerPolicy',
-        'PermissionPolicy',
-        'RolePolicy',
-        'CriteriaPolicy'
     ],
 
     /***************************************************************************
@@ -64,7 +57,7 @@ module.exports.policies = {
     },
 
     TestController: {
-        '*': ['jwtAuth'],
-        bye: ['jwtAuth'] //, 'isAdministrator']
+        '*': ['jwtAuth', 'isAdministrator'],
+        bye: ['jwtAuth']
     }
 };

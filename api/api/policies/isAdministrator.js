@@ -13,13 +13,24 @@ module.exports = function(req, res, next) {
         var message = 'Unable to identify User requesting authorization';
         sails.log.info(message);
         return res.forbidden(message);
-    }
-    if (req.user.id == 1) {
-        sails.log.verbose('User is an Administrator');
-        next();
     } else {
-        var message = 'User is not authorized to perform this function';
-        sails.log.info(message);
-        return res.forbidden(message);
+        User.findOne({
+                id: req.user.id
+            })
+            .then(function(user) {
+                if (user.isAdministrator) {
+                    sails.log.verbose('User is an Administrator');
+                    next();
+                } else {
+                    var message = 'User is not authorized to perform this function';
+                    sails.log.info(message);
+                    return res.forbidden(message);
+                }
+            })
+            .catch(function(error) {
+                sails.log.error('Error occured trying to retrieve User to check authorization');
+                sails.log.error(error);
+                return res.forbidden(error);
+            });
     }
 };
