@@ -4,22 +4,6 @@
  * @docs        :: http://sailsjs.org/#!documentation/models
  */
 module.exports = User = {
-    schema: true,
-
-    attributes: {
-        username: {
-            type: 'string',
-            unique: true
-        },
-        email: {
-            type: 'email',
-            unique: true
-        },
-        passports: {
-            collection: 'Passport',
-            via: 'user'
-        }
-    },
 
     /**
      * Creates a Wallet associated with this user

@@ -20,13 +20,5 @@ module.exports = {
             type: 'string',
             required: true
         },
-        distributionsReceived: {
-            collection: 'Distribution',
-            via: 'receivers'
-        },
-        distributionsIssued: {
-            collection: 'Distribution',
-            via: 'issuer'
-        }
     }
 };
