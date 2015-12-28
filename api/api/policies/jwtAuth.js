@@ -1,4 +1,14 @@
-
+/**
+ * JWT Authentication
+ *
+ * Retrieves the Authorization header, or access_token querystring parameter 
+ * and decrypts the JWT to retrieve a user object and user ID. 
+ * If the user exists then access is authorized
+ *
+ * @param {Object}   req
+ * @param {Object}   res
+ * @param {Function} next
+ */
 module.exports = function (req, res, next) {
   var token;
 
@@ -12,12 +22,12 @@ module.exports = function (req, res, next) {
         token = credentials;
       }
     } else {
-      return res.unauthorized('Format is Authorization: Bearer [token]');
+      return res.unauthorized('Format is Authorization: Bearer [access_token]');
     }
-  } else if (req.param('token')) {
-    token = req.param('token');
+  } else if (req.param('access_token')) {
+    token = req.param('access_token');
     // We delete the token from param to not mess with blueprints
-    delete req.query.token;
+    delete req.query.access_token;
   } else {
     return res.unauthorized('No Authorization header was found');
   }

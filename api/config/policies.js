@@ -52,4 +52,8 @@ module.exports.policies = {
     'auth': {
         '*': ['passport']
     },
+
+    TestController: {
+        bye: ['jwtAuth', 'isAdministrator']
+    }
 };

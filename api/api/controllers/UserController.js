@@ -1,0 +1,7 @@
+/**
+ * User Controller
+ *
+ */
+ module.exports = {
+
+ };

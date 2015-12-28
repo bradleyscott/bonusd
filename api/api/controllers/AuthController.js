@@ -44,7 +44,12 @@ var AuthController = {
                     res.unauthorized(error);
                 } else {
                     var token = JWTService.createToken(user);
-                    res.json(token);
+                    var response = {
+                        user: user, 
+                        access_token: token,
+                    };
+
+                    res.json(response);
                 }
             });
         });
