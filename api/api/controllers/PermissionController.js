@@ -1,7 +1,7 @@
-// config/passport.js
+// api/controllers/PermissionController.js
 
 var _ = require('lodash');
-var _super = require('sails-permissions/config/passport');
+var _super = require('sails-permissions/api/controllers/PermissionController');
 
 _.merge(exports, _super);
 _.merge(exports, {

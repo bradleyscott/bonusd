@@ -1,15 +1,19 @@
-/**
- * User.js
- * @description :: Describes a user for authentication purposes
- * @docs        :: http://sailsjs.org/#!documentation/models
- */
-module.exports = User = {
+// api/models/User.js
+
+var _ = require('lodash');
+var _super = require('sails-permissions/api/models/User');
+
+_.merge(exports, _super);
+_.merge(exports, {
 
     /**
      * Creates a Wallet associated with this user
      * Also creates the blockchain wallet address for the Wallet
+     * Grants Admin permissions if user is a configured admin
      */
     afterCreate: function(user, callback) {
+
+        // Create Wallet
         sails.log.verbose('User created');
         sails.log.verbose(user);
 
@@ -39,5 +43,11 @@ module.exports = User = {
                     });
             }
         });
+
+        // Create Admin user if required
+        var adminUsers = sails.config.permissions.adminEmails;
+        if(_(adminUsers).includes(user.email)) {
+            
+        }
     },
-};
+});

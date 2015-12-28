@@ -1,7 +1,7 @@
-// config/passport.js
+// api/models/SecurityLog.js
 
 var _ = require('lodash');
-var _super = require('sails-permissions/config/passport');
+var _super = require('sails-permissions/api/models/SecurityLog');
 
 _.merge(exports, _super);
 _.merge(exports, {

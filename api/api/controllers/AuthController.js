@@ -1,11 +1,10 @@
-/**
- * Authentication Controller
- *
- * This is merely meant as an example of how your Authentication controller
- * should look. It currently includes the minimum amount of functionality for
- * the basics of Passport.js to work.
- */
-var AuthController = {
+// api/controllers/AuthController.js
+
+var _ = require('lodash');
+var _super = require('sails-permissions/api/controllers/AuthController');
+
+_.merge(exports, _super);
+_.merge(exports, {
 
     /**
      * Create a third-party authentication endpoint
@@ -45,7 +44,7 @@ var AuthController = {
                 } else {
                     var token = JWTService.createToken(user);
                     var response = {
-                        user: user, 
+                        user: user,
                         access_token: token,
                     };
 
@@ -64,6 +63,4 @@ var AuthController = {
     disconnect: function(req, res) {
         passport.disconnect(req, res);
     }
-};
-
-module.exports = AuthController;
+});
